@@ -12,9 +12,6 @@ const nextConfig = {
   serverExternalPackages: [
     '@neondatabase/serverless',
     'ws',
-    'better-auth',
-    '@better-auth/kysely-adapter',
-    'kysely',
   ],
   turbopack: {},
   rewrites() {
