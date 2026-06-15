@@ -3,6 +3,12 @@
 /* Force dark: classes to only work with .dark class — we never add it, so site is always light */
 @custom-variant dark (&:is(.dark *));
 
+/* Paksa selalu mode terang di semua browser & device */
+html, body {
+    color-scheme: light only;
+}
+
+
 :root {
     /* School Identity Colors - Green & Gold */
     --green: #1a6b3a;
