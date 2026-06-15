@@ -27,8 +27,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id">
+    <html lang="id" style={{ colorScheme: 'light' }}>
       <head>
+        {/* Force light mode — override OS/browser dark mode preference */}
+        <meta name="color-scheme" content="light" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -41,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <link rel="icon" href="/images/logo-tutwuri.png" type="image/png" />
       </head>
-      <body style={{ fontFamily: "'Plus Jakarta Sans', 'Inter', system-ui, sans-serif" }}>
+      <body style={{ fontFamily: "'Plus Jakarta Sans', 'Inter', system-ui, sans-serif", colorScheme: 'light' }}>
         {children}
         <Toaster position="top-right" closeButton richColors />
       </body>
