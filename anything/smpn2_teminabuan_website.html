@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--green:#1a6b3a;--green-light:#2d9e58;--green-dark:#0f4525;
+--gold:#c8902b;--gold-light:#e8b04a;--gold-pale:#fdf4e3;
+--white:#fff;--gray-50:#f8f9fa;--gray-100:#f0f2f4;--gray-200:#dee2e6;
+--gray-400:#868e96;--gray-700:#343a40;--text:#1a1f2e;
+--radius:10px;--radius-lg:16px;
+}
+body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden}
+
+/* TOPBAR */
+.topbar{background:var(--green-dark);color:#fff;font-size:12.5px;padding:7px 0}
+.topbar-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.topbar-left{display:flex;gap:20px}
+.topbar-item{display:flex;align-items:center;gap:5px;opacity:.9}
+.topbar-right a{color:#fff;text-decoration:none;margin-left:14px;opacity:.85;font-size:12px;transition:.2s}
+.topbar-right a:hover{opacity:1}
+
+/* NAVBAR */
+.navbar{background:var(--white);border-bottom:2px solid var(--green);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.navbar-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:70px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand-logo{width:52px;height:52px;background:linear-gradient(135deg,var(--green),var(--green-light));border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:#fff;flex-shrink:0}
+.brand-text h1{font-size:15px;font-weight:700;color:var(--green-dark);line-height:1.2}
+.brand-text p{font-size:11px;color:var(--gray-400);font-weight:500}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-item{position:relative}
+.nav-link{display:flex;align-items:center;gap:4px;padding:8px 13px;color:var(--gray-700);font-size:14px;font-weight:500;text-decoration:none;border-radius:8px;cursor:pointer;border:none;background:transparent;transition:.2s;white-space:nowrap}
+.nav-link:hover,.nav-link.active{background:var(--green);color:#fff}
+.nav-link i{font-size:13px}
+.dropdown{position:absolute;top:calc(100% + 8px);left:0;background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);box-shadow:0 8px 32px rgba(0,0,0,.12);min-width:200px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:.2s;z-index:200}
+.nav-item:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.dropdown a{display:flex;align-items:center;gap:8px;padding:10px 16px;font-size:13.5px;color:var(--gray-700);text-decoration:none;transition:.15s}
+.dropdown a:hover{background:var(--gray-50);color:var(--green)}
+.dropdown a i{font-size:15px;color:var(--green-light)}
+.nav-cta{background:var(--gold);color:#fff;padding:8px 18px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:.2s}
+.nav-cta:hover{background:var(--gold-light)}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 60%,#1d8a46 100%);min-height:520px;display:flex;align-items:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.hero-inner{max-width:1200px;margin:0 auto;padding:60px 24px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);color:#fff;padding:5px 14px;border-radius:30px;font-size:12.5px;font-weight:600;margin-bottom:18px;border:1px solid rgba(255,255,255,.2)}
+.hero h2{font-size:40px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:14px}
+.hero h2 span{color:var(--gold-light)}
+.hero p{color:rgba(255,255,255,.85);font-size:16px;line-height:1.7;margin-bottom:28px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{background:var(--gold);color:#fff;padding:12px 26px;border-radius:9px;font-size:15px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:.2s}
+.btn-primary:hover{background:var(--gold-light)}
+.btn-secondary{background:rgba(255,255,255,.15);color:#fff;padding:12px 24px;border-radius:9px;font-size:15px;font-weight:500;text-decoration:none;display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.3);transition:.2s}
+.btn-secondary:hover{background:rgba(255,255,255,.25)}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+.hero-stat{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:var(--radius);padding:16px;text-align:center}
+.hero-stat-num{font-size:28px;font-weight:800;color:var(--gold-light)}
+.hero-stat-label{font-size:12px;color:rgba(255,255,255,.8);margin-top:2px}
+.hero-visual{display:flex;flex-direction:column;gap:12px}
+.info-card{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:var(--radius-lg);padding:18px 20px;backdrop-filter:blur(8px)}
+.info-card-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.info-card-icon{width:36px;height:36px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px}
+.info-card-title{font-weight:600;color:#fff;font-size:14px}
+.info-card-subtitle{font-size:12px;color:rgba(255,255,255,.7)}
+.info-card p{font-size:13px;color:rgba(255,255,255,.85);line-height:1.6}
+
+/* SECTION COMMONS */
+section{padding:72px 0}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.section-header{text-align:center;margin-bottom:48px}
+.section-tag{display:inline-block;background:var(--green);color:#fff;font-size:12px;font-weight:600;padding:4px 14px;border-radius:30px;margin-bottom:10px;letter-spacing:.5px}
+.section-title{font-size:30px;font-weight:800;color:var(--green-dark);margin-bottom:10px}
+.section-desc{color:var(--gray-400);font-size:15.5px;max-width:560px;margin:0 auto;line-height:1.7}
+.divider-line{width:56px;height:3px;background:var(--gold);margin:14px auto 0;border-radius:2px}
+
+/* ANNOUNCEMENT TICKER */
+.ticker{background:var(--gold-pale);border-top:3px solid var(--gold);border-bottom:1px solid #e8d4aa;padding:0}
+.ticker-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:stretch}
+.ticker-label{background:var(--gold);color:#fff;font-size:12.5px;font-weight:700;padding:10px 18px;white-space:nowrap;display:flex;align-items:center;gap:6px;flex-shrink:0}
+.ticker-track{overflow:hidden;flex:1;padding:10px 16px;display:flex;align-items:center}
+.ticker-items{display:flex;gap:48px;animation:ticker 25s linear infinite;white-space:nowrap}
+.ticker-item{font-size:13.5px;color:var(--green-dark);font-weight:500;display:flex;align-items:center;gap:6px;cursor:pointer}
+.ticker-item:hover{color:var(--gold)}
+.ticker-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;flex-shrink:0}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* QUICK ACCESS */
+.quick-access{background:var(--gray-50);padding:48px 0}
+.qa-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.qa-card{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:20px 14px;text-align:center;text-decoration:none;color:var(--text);transition:.2s;cursor:pointer}
+.qa-card:hover{border-color:var(--green);box-shadow:0 4px 16px rgba(26,107,58,.12);transform:translateY(-2px)}
+.qa-card:hover .qa-icon{background:var(--green);color:#fff}
+.qa-icon{width:52px;height:52px;background:var(--green);background:rgba(26,107,58,.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;color:var(--green);font-size:24px;transition:.2s}
+.qa-label{font-size:13px;font-weight:600;color:var(--gray-700)}
+
+/* BERITA */
+.news-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:24px}
+.news-main{border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--gray-200);background:#fff;transition:.2s}
+.news-main:hover{box-shadow:0 6px 24px rgba(0,0,0,.1)}
+.news-img{height:220px;background:linear-gradient(135deg,var(--green) 0%,var(--green-light) 100%);display:flex;align-items:center;justify-content:center;font-size:60px;position:relative}
+.news-img-label{position:absolute;top:14px;left:14px;background:var(--gold);color:#fff;font-size:11.5px;font-weight:700;padding:4px 12px;border-radius:30px}
+.news-body{padding:18px}
+.news-meta{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray-400);margin-bottom:10px}
+.news-title{font-size:16.5px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:8px}
+.news-excerpt{font-size:13.5px;color:var(--gray-400);line-height:1.65}
+.news-side{display:flex;flex-direction:column;gap:16px}
+.news-card-sm{display:flex;gap:14px;padding:14px;border-radius:var(--radius);border:1px solid var(--gray-200);background:#fff;transition:.2s;cursor:pointer;text-decoration:none;color:var(--text)}
+.news-card-sm:hover{border-color:var(--green);box-shadow:0 3px 12px rgba(26,107,58,.1)}
+.news-thumb{width:70px;height:70px;border-radius:8px;background:linear-gradient(135deg,var(--green-dark),var(--green-light));flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:26px}
+.news-card-sm-body{flex:1}
+.news-cat{font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.5px}
+.news-card-sm-title{font-size:13.5px;font-weight:600;line-height:1.4;margin:3px 0 4px}
+.news-date-sm{font-size:11.5px;color:var(--gray-400)}
+.btn-outline{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border:2px solid var(--green);color:var(--green);border-radius:9px;font-size:14px;font-weight:600;text-decoration:none;transition:.2s}
+.btn-outline:hover{background:var(--green);color:#fff}
+.news-more{text-align:center;margin-top:32px}
+
+/* PROFIL */
+.profil-section{background:var(--green-dark);color:#fff}
+.profil-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.profil-label{font-size:12px;font-weight:700;color:var(--gold-light);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+.profil-title{font-size:32px;font-weight:800;line-height:1.25;margin-bottom:18px}
+.profil-title span{color:var(--gold-light)}
+.profil-desc{color:rgba(255,255,255,.8);line-height:1.75;font-size:15px;margin-bottom:24px}
+.profil-items{display:flex;flex-direction:column;gap:12px}
+.profil-item{display:flex;align-items:flex-start;gap:12px;padding:14px;background:rgba(255,255,255,.07);border-radius:var(--radius);border:1px solid rgba(255,255,255,.1)}
+.profil-item-icon{width:38px;height:38px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;flex-shrink:0}
+.profil-item-text h4{font-size:14px;font-weight:600;margin-bottom:3px}
+.profil-item-text p{font-size:13px;color:rgba(255,255,255,.7);line-height:1.5}
+.akreditasi-badge{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#fff;padding:10px 20px;border-radius:var(--radius);font-weight:700;font-size:16px;margin-bottom:28px}
+
+/* EKSKUL */
+.ekskul-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.ekskul-card{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;transition:.2s;cursor:pointer}
+.ekskul-card:hover{box-shadow:0 6px 24px rgba(26,107,58,.12);transform:translateY(-3px);border-color:var(--green)}
+.ekskul-img{height:120px;display:flex;align-items:center;justify-content:center;font-size:48px}
+.ekskul-body{padding:14px 16px}
+.ekskul-name{font-size:15px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.ekskul-info{font-size:12.5px;color:var(--gray-400)}
+.ekskul-tag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(26,107,58,.1);color:var(--green);display:inline-block;margin-top:8px}
+
+/* PRESTASI */
+.prestasi-section{background:var(--gold-pale)}
+.prestasi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.prestasi-card{background:#fff;border-radius:var(--radius-lg);padding:24px;border:1px solid #e8d4aa;text-align:center;transition:.2s}
+.prestasi-card:hover{box-shadow:0 4px 18px rgba(200,144,43,.2);transform:translateY(-2px)}
+.prestasi-medal{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 14px}
+.gold-medal{background:#fff7e0;border:3px solid #c8902b}
+.silver-medal{background:#f4f4f4;border:3px solid #a0a0a0}
+.bronze-medal{background:#fff1e8;border:3px solid #b5651d}
+.prestasi-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.prestasi-event{font-size:13px;color:var(--gray-400);margin-bottom:4px}
+.prestasi-level{font-size:12px;font-weight:600;padding:3px 12px;border-radius:20px;background:rgba(26,107,58,.1);color:var(--green);display:inline-block}
+
+/* GURU */
+.guru-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.guru-card{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;text-align:center;transition:.2s}
+.guru-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.1);border-color:var(--green)}
+.guru-avatar{height:110px;background:linear-gradient(135deg,var(--green-dark),var(--green-light));display:flex;align-items:center;justify-content:center;font-size:42px}
+.guru-body{padding:14px}
+.guru-name{font-size:14px;font-weight:700;margin-bottom:3px}
+.guru-subject{font-size:12.5px;color:var(--gray-400);margin-bottom:6px}
+.guru-badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(26,107,58,.1);color:var(--green)}
+
+/* FASILITAS */
+.fasilitas-section{background:var(--gray-50)}
+.fasilitas-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.fasilitas-card{background:#fff;border-radius:var(--radius-lg);padding:22px 18px;border:1px solid var(--gray-200);text-align:center;transition:.2s}
+.fasilitas-card:hover{border-color:var(--green);box-shadow:0 4px 16px rgba(26,107,58,.1)}
+.fasilitas-icon{font-size:40px;margin-bottom:12px;display:block}
+.fasilitas-name{font-size:15px;font-weight:700;margin-bottom:4px}
+.fasilitas-desc{font-size:13px;color:var(--gray-400);line-height:1.5}
+
+/* PPDB */
+.ppdb-section{background:linear-gradient(135deg,var(--gold) 0%,#e8b04a 100%)}
+.ppdb-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.ppdb-title{font-size:32px;font-weight:800;color:#fff;margin-bottom:12px}
+.ppdb-desc{color:rgba(255,255,255,.9);font-size:15.5px;line-height:1.7;margin-bottom:24px}
+.ppdb-steps{display:flex;flex-direction:column;gap:14px}
+.ppdb-step{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.2);border-radius:var(--radius);padding:14px 16px;border:1px solid rgba(255,255,255,.3)}
+.ppdb-step-num{width:32px;height:32px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--gold);font-size:15px;flex-shrink:0}
+.ppdb-step-text{color:#fff;font-size:14px;font-weight:500}
+.ppdb-btn{background:#fff;color:var(--gold);padding:13px 28px;border-radius:9px;font-size:15px;font-weight:700;display:inline-flex;align-items:center;gap:7px;text-decoration:none;transition:.2s}
+.ppdb-btn:hover{background:var(--green-dark);color:#fff}
+
+/* KONTAK */
+.kontak-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:40px}
+.kontak-info{display:flex;flex-direction:column;gap:16px}
+.kontak-item{display:flex;gap:14px;align-items:flex-start;padding:16px;background:var(--gray-50);border-radius:var(--radius);border:1px solid var(--gray-200)}
+.kontak-icon{width:40px;height:40px;background:var(--green);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;flex-shrink:0}
+.kontak-label{font-size:12px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.kontak-val{font-size:14.5px;color:var(--text);line-height:1.5}
+.kontak-form{background:var(--gray-50);border-radius:var(--radius-lg);padding:28px;border:1px solid var(--gray-200)}
+.kontak-form h3{font-size:18px;font-weight:700;margin-bottom:20px;color:var(--green-dark)}
+.form-group{margin-bottom:14px}
+.form-label{font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:5px;display:block}
+.form-input{width:100%;padding:10px 14px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:14px;color:var(--text);font-family:inherit;transition:.2s;background:#fff}
+.form-input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(26,107,58,.1)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-textarea{resize:vertical;min-height:90px}
+.btn-send{background:var(--green);color:#fff;padding:11px 24px;border-radius:8px;font-size:14.5px;font-weight:600;border:none;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:6px;transition:.2s}
+.btn-send:hover{background:var(--green-dark)}
+
+/* GALERI */
+.galeri-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.galeri-item{border-radius:var(--radius);overflow:hidden;aspect-ratio:1;cursor:pointer;position:relative;transition:.2s}
+.galeri-item:hover{transform:scale(1.02)}
+.galeri-item:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+.galeri-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:50px}
+.galeri-img.g1{background:linear-gradient(135deg,#1a6b3a,#2d9e58);height:100%;min-height:200px}
+.galeri-img.g2{background:linear-gradient(135deg,#0f4525,#1a6b3a)}
+.galeri-img.g3{background:linear-gradient(135deg,#c8902b,#e8b04a)}
+.galeri-img.g4{background:linear-gradient(135deg,#185fa5,#378add)}
+.galeri-img.g5{background:linear-gradient(135deg,#639922,#97c459)}
+.galeri-overlay{position:absolute;inset:0;background:rgba(0,0,0,0);display:flex;align-items:flex-end;transition:.2s}
+.galeri-item:hover .galeri-overlay{background:rgba(0,0,0,.4)}
+.galeri-caption{padding:12px;color:#fff;font-size:13px;font-weight:600;opacity:0;transform:translateY(6px);transition:.2s}
+.galeri-item:hover .galeri-caption{opacity:1;transform:translateY(0)}
+
+/* FOOTER */
+footer{background:var(--green-dark);color:#fff;padding:56px 0 0}
+.footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:36px;margin-bottom:40px}
+.footer-brand .brand-logo{margin-bottom:14px;width:56px;height:56px}
+.footer-brand p{color:rgba(255,255,255,.7);font-size:14px;line-height:1.7;margin-top:10px}
+.footer-col h4{font-size:14.5px;font-weight:700;margin-bottom:16px;color:var(--gold-light)}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.footer-col ul li a{color:rgba(255,255,255,.7);text-decoration:none;font-size:13.5px;display:flex;align-items:center;gap:6px;transition:.2s}
+.footer-col ul li a:hover{color:#fff}
+.footer-col ul li a i{font-size:13px}
+.social-links{display:flex;gap:10px;margin-top:14px}
+.social-link{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:#fff;font-size:17px;text-decoration:none;transition:.2s}
+.social-link:hover{background:var(--gold)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding:18px 0;text-align:center;color:rgba(255,255,255,.5);font-size:13px}
+.footer-bottom span{color:var(--gold-light)}
+
+/* TABS NAV */
+.tabs{display:flex;gap:8px;margin-bottom:28px;border-bottom:2px solid var(--gray-200);padding-bottom:0}
+.tab{padding:10px 20px;font-size:14.5px;font-weight:600;color:var(--gray-400);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:.2s}
+.tab.active{color:var(--green);border-bottom-color:var(--green)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+</style>
+</head>
+<body>
+<h2 class="sr-only" style="position:absolute;left:-9999px">Website resmi SMPN 2 Teminabuan — Sorong Selatan, Papua Barat Daya</h2>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <span class="topbar-item"><i class="ti ti-map-pin"></i> Jl. Pendidikan No.1, Teminabuan, Sorong Selatan</span>
+      <span class="topbar-item"><i class="ti ti-phone"></i> (0956) 123-456</span>
+      <span class="topbar-item"><i class="ti ti-mail"></i> info@smpn2teminabuan.sch.id</span>
+    </div>
+    <div class="topbar-right">
+      <a href="#"><i class="ti ti-brand-facebook"></i></a>
+      <a href="#"><i class="ti ti-brand-instagram"></i></a>
+      <a href="#"><i class="ti ti-brand-youtube"></i></a>
+      <a href="#">Portal Guru</a>
+      <a href="#">Portal Siswa</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="#">
+      <div class="brand-logo">S2T</div>
+      <div class="brand-text">
+        <h1>SMPN 2 Teminabuan</h1>
+        <p>Sorong Selatan — Papua Barat Daya</p>
+      </div>
+    </a>
+    <div class="nav-links">
+      <div class="nav-item">
+        <a class="nav-link active" href="#">Beranda</a>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" href="#profil">Profil <i class="ti ti-chevron-down"></i></a>
+        <div class="dropdown">
+          <a href="#"><i class="ti ti-info-circle"></i>Tentang Sekolah</a>
+          <a href="#"><i class="ti ti-eye"></i>Visi & Misi</a>
+          <a href="#"><i class="ti ti-list"></i>Sejarah Singkat</a>
+          <a href="#"><i class="ti ti-user-star"></i>Kepala Sekolah</a>
+          <a href="#"><i class="ti ti-building"></i>Struktur Organisasi</a>
+          <a href="#"><i class="ti ti-award"></i>Akreditasi</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" href="#akademik">Akademik <i class="ti ti-chevron-down"></i></a>
+        <div class="dropdown">
+          <a href="#"><i class="ti ti-book"></i>Kurikulum</a>
+          <a href="#"><i class="ti ti-calendar"></i>Kalender Akademik</a>
+          <a href="#"><i class="ti ti-users"></i>Data Siswa</a>
+          <a href="#"><i class="ti ti-school"></i>Mata Pelajaran</a>
+          <a href="#"><i class="ti ti-file-certificate"></i>Hasil UN / ASPD</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" href="#ekskul">Kesiswaan <i class="ti ti-chevron-down"></i></a>
+        <div class="dropdown">
+          <a href="#"><i class="ti ti-trophy"></i>Ekstrakurikuler</a>
+          <a href="#"><i class="ti ti-medal"></i>Prestasi Siswa</a>
+          <a href="#"><i class="ti ti-star"></i>OSIS</a>
+          <a href="#"><i class="ti ti-heart"></i>BK / Konseling</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" href="#fasilitas">Fasilitas</a>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" href="#berita">Berita <i class="ti ti-chevron-down"></i></a>
+        <div class="dropdown">
+          <a href="#"><i class="ti ti-news"></i>Berita Sekolah</a>
+          <a href="#"><i class="ti ti-photo"></i>Galeri Foto</a>
+          <a href="#"><i class="ti ti-video"></i>Galeri Video</a>
+          <a href="#"><i class="ti ti-file-text"></i>Pengumuman</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" href="#kontak">Kontak</a>
+      </div>
+    </div>
+    <a class="nav-cta" href="#ppdb">Daftar PPDB 2025</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><i class="ti ti-star-filled"></i> Akreditasi A — Unggul</div>
+      <h2>Sekolah Menengah Pertama<br><span>Unggulan Papua</span><br>Barat Daya</h2>
+      <p>SMPN 2 Teminabuan hadir untuk mencetak generasi cerdas, berkarakter, dan berbudaya di jantung Sorong Selatan. Bergabunglah bersama kami dalam perjalanan pendidikan yang bermakna.</p>
+      <div class="hero-btns">
+        <a class="btn-primary" href="#ppdb"><i class="ti ti-arrow-right"></i> Daftar Sekarang</a>
+        <a class="btn-secondary" href="#profil"><i class="ti ti-info-circle"></i> Tentang Sekolah</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">650+</div>
+          <div class="hero-stat-label">Siswa Aktif</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">42</div>
+          <div class="hero-stat-label">Tenaga Pengajar</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">18</div>
+          <div class="hero-stat-label">Ekskul Aktif</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="info-card">
+        <div class="info-card-head">
+          <div class="info-card-icon"><i class="ti ti-calendar-event"></i></div>
+          <div>
+            <div class="info-card-title">Tahun Ajaran 2025/2026</div>
+            <div class="info-card-subtitle">Aktif · Semester Ganjil</div>
+          </div>
+        </div>
+        <p>Penerimaan Peserta Didik Baru (PPDB) sedang dibuka. Segera daftarkan putra-putri Anda sebelum kuota terpenuhi.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-head">
+          <div class="info-card-icon"><i class="ti ti-trophy"></i></div>
+          <div>
+            <div class="info-card-title">Prestasi Terbaru</div>
+            <div class="info-card-subtitle">Juara 1 OSN IPA Tingkat Kabupaten</div>
+          </div>
+        </div>
+        <p>Siswa kami meraih Juara 1 Olimpiade Sains Nasional bidang IPA di tingkat Kabupaten Sorong Selatan, Mei 2025.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-head">
+          <div class="info-card-icon"><i class="ti ti-clock"></i></div>
+          <div>
+            <div class="info-card-title">Jadwal Kegiatan Hari Ini</div>
+            <div class="info-card-subtitle">Senin, 8 Juni 2026</div>
+          </div>
+        </div>
+        <p>07:00 — Upacara Bendera · 08:00 — KBM Reguler · 14:00 — Ekskul Pramuka & Olahraga</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <div class="ticker-label"><i class="ti ti-bell-ringing"></i> PENGUMUMAN</div>
+    <div class="ticker-track">
+      <div class="ticker-items">
+        <span class="ticker-item"><span class="ticker-dot"></span>PPDB Tahun Ajaran 2025/2026 Dibuka — Kuota Terbatas!</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Ujian Akhir Semester Ganjil: 10–20 Juni 2026</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Lomba Seni Budaya Papua 22 Juni 2026 — Daftarkan Tim Anda!</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Pembagian Rapor Semester Ganjil: 28 Juni 2026</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>PPDB Tahun Ajaran 2025/2026 Dibuka — Kuota Terbatas!</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Ujian Akhir Semester Ganjil: 10–20 Juni 2026</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Lomba Seni Budaya Papua 22 Juni 2026 — Daftarkan Tim Anda!</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Pembagian Rapor Semester Ganjil: 28 Juni 2026</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK ACCESS -->
+<section class="quick-access">
+  <div class="container">
+    <div class="qa-grid">
+      <a class="qa-card" href="#ppdb">
+        <div class="qa-icon"><i class="ti ti-user-plus"></i></div>
+        <div class="qa-label">PPDB Online</div>
+      </a>
+      <a class="qa-card" href="#">
+        <div class="qa-icon"><i class="ti ti-calendar-month"></i></div>
+        <div class="qa-label">Kalender Akademik</div>
+      </a>
+      <a class="qa-card" href="#">
+        <div class="qa-icon"><i class="ti ti-file-certificate"></i></div>
+        <div class="qa-label">E-Raport Siswa</div>
+      </a>
+      <a class="qa-card" href="#">
+        <div class="qa-icon"><i class="ti ti-map-pin"></i></div>
+        <div class="qa-label">Lokasi Sekolah</div>
+      </a>
+      <a class="qa-card" href="#">
+        <div class="qa-icon"><i class="ti ti-file-download"></i></div>
+        <div class="qa-label">Unduh Formulir</div>
+      </a>
+      <a class="qa-card" href="#">
+        <div class="qa-icon"><i class="ti ti-headset"></i></div>
+        <div class="qa-label">Hubungi Kami</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BERITA -->
+<section id="berita">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">BERITA & INFORMASI</div>
+      <h2 class="section-title">Berita Terkini Sekolah</h2>
+      <p class="section-desc">Update terbaru kegiatan, prestasi, dan informasi penting dari SMPN 2 Teminabuan.</p>
+      <div class="divider-line"></div>
+    </div>
+    <div class="news-grid">
+      <div class="news-main">
+        <div class="news-img">🏆<div class="news-img-label">Prestasi</div></div>
+        <div class="news-body">
+          <div class="news-meta"><i class="ti ti-calendar"></i> 5 Juni 2026 <i class="ti ti-point"></i> Admin</div>
+          <div class="news-title">Siswa SMPN 2 Teminabuan Raih Juara 1 OSN Bidang IPA Tingkat Kabupaten Sorong Selatan</div>
+          <div class="news-excerpt">Atas nama seluruh keluarga besar SMPN 2 Teminabuan, kami mengucapkan selamat kepada Ananda Yohana Kambu yang berhasil meraih Juara 1 Olimpiade Sains Nasional bidang IPA tahun 2025...</div>
+        </div>
+      </div>
+      <div class="news-side">
+        <a class="news-card-sm" href="#">
+          <div class="news-thumb">📚</div>
+          <div class="news-card-sm-body">
+            <div class="news-cat">Akademik</div>
+            <div class="news-card-sm-title">Peluncuran Program Literasi Digital Siswa 2025</div>
+            <div class="news-date-sm"><i class="ti ti-calendar" style="font-size:11px"></i> 1 Juni 2026</div>
+          </div>
+        </a>
+        <a class="news-card-sm" href="#">
+          <div class="news-thumb">🎨</div>
+          <div class="news-card-sm-body">
+            <div class="news-cat">Seni Budaya</div>
+            <div class="news-card-sm-title">Festival Seni Tradisional Papua di Hari Jadi Sekolah</div>
+            <div class="news-date-sm"><i class="ti ti-calendar" style="font-size:11px"></i> 28 Mei 2026</div>
+          </div>
+        </a>
+        <a class="news-card-sm" href="#">
+          <div class="news-thumb">⚽</div>
+          <div class="news-card-sm-body">
+            <div class="news-cat">Olahraga</div>
+            <div class="news-card-sm-title">Tim Sepak Bola Lolos ke Final Turnamen Antar-SMP</div>
+            <div class="news-date-sm"><i class="ti ti-calendar" style="font-size:11px"></i> 20 Mei 2026</div>
+          </div>
+        </a>
+        <a class="news-card-sm" href="#">
+          <div class="news-thumb">🌿</div>
+          <div class="news-card-sm-body">
+            <div class="news-cat">Lingkungan</div>
+            <div class="news-card-sm-title">Program Adiwiyata: Penghijauan Halaman Sekolah</div>
+            <div class="news-date-sm"><i class="ti ti-calendar" style="font-size:11px"></i> 15 Mei 2026</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="news-more">
+      <a class="btn-outline" href="#"><i class="ti ti-arrow-right"></i> Lihat Semua Berita</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROFIL -->
+<section id="profil" class="profil-section">
+  <div class="container">
+    <div class="profil-grid">
+      <div>
+        <div class="profil-label">Tentang Kami</div>
+        <h2 class="profil-title">Membangun Generasi<br><span>Cerdas & Berkarakter</span><br>di Papua Barat Daya</h2>
+        <p class="profil-desc">SMPN 2 Teminabuan berdiri sejak 1987 dan telah melahirkan ribuan alumni yang berkontribusi bagi kemajuan Papua dan Indonesia. Berlokasi di Kabupaten Sorong Selatan, kami berkomitmen untuk memberikan pendidikan berkualitas dengan sentuhan kearifan lokal.</p>
+        <div class="akreditasi-badge"><i class="ti ti-award"></i> Akreditasi A — BAN-S/M 2023</div>
+        <div class="profil-items">
+          <div class="profil-item">
+            <div class="profil-item-icon"><i class="ti ti-eye"></i></div>
+            <div class="profil-item-text">
+              <h4>Visi Sekolah</h4>
+              <p>Terwujudnya lulusan yang cerdas, beriman, berkarakter Pancasila, dan berwawasan lokal-global.</p>
+            </div>
+          </div>
+          <div class="profil-item">
+            <div class="profil-item-icon"><i class="ti ti-target"></i></div>
+            <div class="profil-item-text">
+              <h4>Misi Utama</h4>
+              <p>Menyelenggarakan pembelajaran inovatif berbasis kearifan lokal Papua yang berorientasi pada mutu dan karakter.</p>
+            </div>
+          </div>
+          <div class="profil-item">
+            <div class="profil-item-icon"><i class="ti ti-heart"></i></div>
+            <div class="profil-item-text">
+              <h4>Nilai Unggulan</h4>
+              <p>Integritas · Kolaborasi · Inovasi · Cinta Tanah Papua</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="section-tag" style="margin-bottom:20px">DATA SEKOLAH</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px">
+          <div class="profil-item">
+            <div style="text-align:center;width:100%">
+              <div style="font-size:36px;font-weight:800;color:#e8b04a">650+</div>
+              <div style="font-size:13px;color:rgba(255,255,255,.7)">Siswa Aktif</div>
+            </div>
+          </div>
+          <div class="profil-item">
+            <div style="text-align:center;width:100%">
+              <div style="font-size:36px;font-weight:800;color:#e8b04a">42</div>
+              <div style="font-size:13px;color:rgba(255,255,255,.7)">Guru & Staff</div>
+            </div>
+          </div>
+          <div class="profil-item">
+            <div style="text-align:center;width:100%">
+              <div style="font-size:36px;font-weight:800;color:#e8b04a">18</div>
+              <div style="font-size:13px;color:rgba(255,255,255,.7)">Rombel Aktif</div>
+            </div>
+          </div>
+          <div class="profil-item">
+            <div style="text-align:center;width:100%">
+              <div style="font-size:36px;font-weight:800;color:#e8b04a">37</div>
+              <div style="font-size:13px;color:rgba(255,255,255,.7)">Tahun Berdiri</div>
+            </div>
+          </div>
+        </div>
+        <div class="profil-item" style="margin-bottom:12px">
+          <div class="profil-item-icon"><i class="ti ti-user-star"></i></div>
+          <div class="profil-item-text">
+            <h4>Kepala Sekolah</h4>
+            <p>Drs. Yohanis Marey, M.Pd · Periode 2022–Sekarang</p>
+          </div>
+        </div>
+        <div class="profil-item" style="margin-bottom:12px">
+          <div class="profil-item-icon"><i class="ti ti-book"></i></div>
+          <div class="profil-item-text">
+            <h4>Kurikulum</h4>
+            <p>Kurikulum Merdeka Belajar (Fase D) + Mulok Budaya Papua</p>
+          </div>
+        </div>
+        <div class="profil-item">
+          <div class="profil-item-icon"><i class="ti ti-clock"></i></div>
+          <div class="profil-item-text">
+            <h4>Jam Operasional</h4>
+            <p>Senin–Kamis: 07:00–14:00 · Jumat: 07:00–11:30</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EKSKUL -->
+<section id="ekskul">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">KESISWAAN</div>
+      <h2 class="section-title">Ekstrakurikuler Unggulan</h2>
+      <p class="section-desc">Kami menyediakan berbagai kegiatan untuk mengembangkan bakat dan potensi siswa di bidang akademik, seni, olahraga, dan kepemimpinan.</p>
+      <div class="divider-line"></div>
+    </div>
+    <div class="ekskul-grid">
+      <div class="ekskul-card">
+        <div class="ekskul-img" style="background:#e8f5e9">🏸</div>
+        <div class="ekskul-body">
+          <div class="ekskul-name">Bulu Tangkis</div>
+          <div class="ekskul-info">Pelatih: Pak Yanto · Sabtu 08:00</div>
+          <div class="ekskul-tag">Olahraga</div>
+        </div>
+      </div>
+      <div class="ekskul-card">
+        <div class="ekskul-img" style="background:#fff3e0">🎭</div>
+        <div class="ekskul-body">
+          <div class="ekskul-name">Tari Tradisional Papua</div>
+          <div class="ekskul-info">Pelatih: Bu Yuliana · Jumat 14:00</div>
+          <div class="ekskul-tag">Seni Budaya</div>
+        </div>
+      </div>
+      <div class="ekskul-card">
+        <div class="ekskul-img" style="background:#e3f2fd">🔬</div>
+        <div class="ekskul-body">
+          <div class="ekskul-name">Kelompok Ilmiah Remaja</div>
+          <div class="ekskul-info">Pembina: Bu Sitti · Kamis 14:00</div>
+          <div class="ekskul-tag">Akademik</div>
+        </div>
+      </div>
+      <div class="ekskul-card">
+        <div class="ekskul-img" style="background:#fce4ec">⚽</div>
+        <div class="ekskul-body">
+          <div class="ekskul-name">Sepak Bola</div>
+          <div class="ekskul-info">Pelatih: Pak Melky · Sabtu 07:00</div>
+          <div class="ekskul-tag">Olahraga</div>
+        </div>
+      </div>
+      <div class="ekskul-card">
+        <div class="ekskul-img" style="background:#f3e5f5">🎤</div>
+        <div class="ekskul-body">
+          <div class="ekskul-name">Paduan Suara</div>
+          <div class="ekskul-info">Pelatih: Bu Maria · Rabu 13:30</div>
+          <div class="ekskul-tag">Seni</div>
+        </div>
+      </div>
+      <div class="ekskul-card">
+        <div class="ekskul-img" style="background:#e8f5e9">🏕️</div>
+        <div class="ekskul-body">
+          <div class="ekskul-name">Pramuka</div>
+          <div class="ekskul-info">Pembina: Pak Silas · Jumat 14:00</div>
+          <div class="ekskul-tag">Kepemimpinan</div>
+        </div>
+      </div>
+      <div class="ekskul-card">
+        <div class="ekskul-img" style="background:#fff8e1">💻</div>
+        <div class="ekskul-body">
+          <div class="ekskul-name">Teknologi Informatika</div>
+          <div class="ekskul-info">Pembina: Pak Roni · Kamis 13:00</div>
+          <div class="ekskul-tag">Akademik</div>
+        </div>
+      </div>
+      <div class="ekskul-card">
+        <div class="ekskul-img" style="background:#e0f7fa">🎨</div>
+        <div class="ekskul-body">
+          <div class="ekskul-name">Seni Lukis & Kriya</div>
+          <div class="ekskul-info">Pelatih: Bu Dewi · Selasa 14:00</div>
+          <div class="ekskul-tag">Seni</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESTASI -->
+<section id="prestasi" class="prestasi-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">PRESTASI</div>
+      <h2 class="section-title">Penghargaan & Prestasi Terbaru</h2>
+      <p class="section-desc">Berbagai capaian membanggakan siswa dan sekolah di tingkat kabupaten, provinsi, maupun nasional.</p>
+      <div class="divider-line"></div>
+    </div>
+    <div class="prestasi-grid">
+      <div class="prestasi-card">
+        <div class="prestasi-medal gold-medal">🥇</div>
+        <div class="prestasi-title">Juara 1 OSN IPA</div>
+        <div class="prestasi-event">Olimpiade Sains Nasional 2025</div>
+        <div class="prestasi-level">Tingkat Kabupaten</div>
+      </div>
+      <div class="prestasi-card">
+        <div class="prestasi-medal gold-medal">🥇</div>
+        <div class="prestasi-title">Juara 1 Tari Tradisional</div>
+        <div class="prestasi-event">Festival Budaya Papua 2025</div>
+        <div class="prestasi-level">Tingkat Provinsi</div>
+      </div>
+      <div class="prestasi-card">
+        <div class="prestasi-medal silver-medal">🥈</div>
+        <div class="prestasi-title">Juara 2 Sepak Bola</div>
+        <div class="prestasi-event">Turnamen O2SN 2025</div>
+        <div class="prestasi-level">Tingkat Kabupaten</div>
+      </div>
+      <div class="prestasi-card">
+        <div class="prestasi-medal gold-medal">🏆</div>
+        <div class="prestasi-title">Sekolah Adiwiyata</div>
+        <div class="prestasi-event">Penghargaan Lingkungan Hidup 2024</div>
+        <div class="prestasi-level">Tingkat Kabupaten</div>
+      </div>
+      <div class="prestasi-card">
+        <div class="prestasi-medal bronze-medal">🥉</div>
+        <div class="prestasi-title">Juara 3 Matematika</div>
+        <div class="prestasi-event">KSM Tingkat Kabupaten 2025</div>
+        <div class="prestasi-level">Tingkat Kabupaten</div>
+      </div>
+      <div class="prestasi-card">
+        <div class="prestasi-medal gold-medal">🥇</div>
+        <div class="prestasi-title">Juara 1 Paduan Suara</div>
+        <div class="prestasi-event">Festival Seni Pelajar 2024</div>
+        <div class="prestasi-level">Tingkat Provinsi</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GURU -->
+<section id="guru">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">TENAGA PENDIDIK</div>
+      <h2 class="section-title">Guru & Staff Pengajar</h2>
+      <p class="section-desc">Didukung oleh tenaga pendidik berpengalaman dan berdedikasi tinggi untuk kemajuan siswa.</p>
+      <div class="divider-line"></div>
+    </div>
+    <div class="guru-grid">
+      <div class="guru-card">
+        <div class="guru-avatar">👨‍💼</div>
+        <div class="guru-body">
+          <div class="guru-name">Drs. Yohanis Marey, M.Pd</div>
+          <div class="guru-subject">Kepala Sekolah</div>
+          <div class="guru-badge">S2 Pendidikan</div>
+        </div>
+      </div>
+      <div class="guru-card">
+        <div class="guru-avatar">👩‍🏫</div>
+        <div class="guru-body">
+          <div class="guru-name">Sitti Rahmawati, S.Pd</div>
+          <div class="guru-subject">IPA / Biologi</div>
+          <div class="guru-badge">Guru Berprestasi</div>
+        </div>
+      </div>
+      <div class="guru-card">
+        <div class="guru-avatar">👨‍🏫</div>
+        <div class="guru-body">
+          <div class="guru-name">Melkyanus Kambu, S.Pd</div>
+          <div class="guru-subject">Penjasorkes</div>
+          <div class="guru-badge">Pelatih Nasional</div>
+        </div>
+      </div>
+      <div class="guru-card">
+        <div class="guru-avatar">👩‍🏫</div>
+        <div class="guru-body">
+          <div class="guru-name">Yuliana Fakdawer, S.Pd</div>
+          <div class="guru-subject">Seni Budaya</div>
+          <div class="guru-badge">Seniman Lokal</div>
+        </div>
+      </div>
+    </div>
+    <div class="news-more"><a class="btn-outline" href="#"><i class="ti ti-users"></i> Lihat Semua Guru</a></div>
+  </div>
+</section>
+
+<!-- FASILITAS -->
+<section id="fasilitas" class="fasilitas-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">FASILITAS</div>
+      <h2 class="section-title">Sarana & Prasarana Lengkap</h2>
+      <p class="section-desc">Fasilitas modern yang mendukung proses belajar mengajar yang nyaman dan efektif.</p>
+      <div class="divider-line"></div>
+    </div>
+    <div class="fasilitas-grid">
+      <div class="fasilitas-card">
+        <span class="fasilitas-icon">🏫</span>
+        <div class="fasilitas-name">18 Ruang Kelas</div>
+        <div class="fasilitas-desc">Ber-AC, proyektor, dan papan tulis interaktif</div>
+      </div>
+      <div class="fasilitas-card">
+        <span class="fasilitas-icon">🔬</span>
+        <div class="fasilitas-name">Lab IPA</div>
+        <div class="fasilitas-desc">Peralatan lengkap untuk praktikum fisika, kimia, dan biologi</div>
+      </div>
+      <div class="fasilitas-card">
+        <span class="fasilitas-icon">💻</span>
+        <div class="fasilitas-name">Lab Komputer</div>
+        <div class="fasilitas-desc">40 unit PC dengan akses internet fiber optic</div>
+      </div>
+      <div class="fasilitas-card">
+        <span class="fasilitas-icon">📚</span>
+        <div class="fasilitas-name">Perpustakaan</div>
+        <div class="fasilitas-desc">Koleksi 5.000+ buku pelajaran, fiksi, dan referensi</div>
+      </div>
+      <div class="fasilitas-card">
+        <span class="fasilitas-icon">⛹️</span>
+        <div class="fasilitas-name">Lapangan Olahraga</div>
+        <div class="fasilitas-desc">Lapangan sepak bola, basket, dan voli standar</div>
+      </div>
+      <div class="fasilitas-card">
+        <span class="fasilitas-icon">🎭</span>
+        <div class="fasilitas-name">Aula Serbaguna</div>
+        <div class="fasilitas-desc">Kapasitas 500 orang untuk pentas seni dan upacara</div>
+      </div>
+      <div class="fasilitas-card">
+        <span class="fasilitas-icon">🕌</span>
+        <div class="fasilitas-name">Musholla & Kapel</div>
+        <div class="fasilitas-desc">Fasilitas ibadah untuk semua agama</div>
+      </div>
+      <div class="fasilitas-card">
+        <span class="fasilitas-icon">🍽️</span>
+        <div class="fasilitas-name">Kantin Sekolah</div>
+        <div class="fasilitas-desc">Kantin bersih dengan menu bergizi dan terjangkau</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PPDB -->
+<section id="ppdb" class="ppdb-section">
+  <div class="container">
+    <div class="ppdb-inner">
+      <div>
+        <div class="section-tag" style="background:rgba(255,255,255,.3);color:#fff;margin-bottom:14px">PPDB 2025/2026</div>
+        <div class="ppdb-title">Penerimaan Peserta<br>Didik Baru Dibuka!</div>
+        <div class="ppdb-desc">Daftarkan putra-putri Anda sekarang dan bergabunglah bersama keluarga besar SMPN 2 Teminabuan. Proses pendaftaran mudah, cepat, dan transparan.</div>
+        <a class="ppdb-btn" href="#"><i class="ti ti-arrow-right"></i> Daftar Online Sekarang</a>
+      </div>
+      <div class="ppdb-steps">
+        <div class="ppdb-step">
+          <div class="ppdb-step-num">1</div>
+          <div class="ppdb-step-text"><strong>Buat Akun</strong> — Daftar di portal PPDB online sekolah</div>
+        </div>
+        <div class="ppdb-step">
+          <div class="ppdb-step-num">2</div>
+          <div class="ppdb-step-text"><strong>Isi Formulir</strong> — Lengkapi data diri dan unggah dokumen</div>
+        </div>
+        <div class="ppdb-step">
+          <div class="ppdb-step-num">3</div>
+          <div class="ppdb-step-text"><strong>Verifikasi</strong> — Datang ke sekolah untuk verifikasi berkas</div>
+        </div>
+        <div class="ppdb-step">
+          <div class="ppdb-step-num">4</div>
+          <div class="ppdb-step-text"><strong>Pengumuman</strong> — Cek hasil seleksi secara online</div>
+        </div>
+        <div style="background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);border-radius:var(--radius);padding:14px 16px">
+          <div style="color:#fff;font-size:13px;font-weight:600;margin-bottom:6px"><i class="ti ti-calendar"></i> Jadwal Penting</div>
+          <div style="color:rgba(255,255,255,.9);font-size:13px;line-height:1.9">
+            Pendaftaran: 1–30 Juni 2026<br>
+            Seleksi: 1–7 Juli 2026<br>
+            Pengumuman: 10 Juli 2026<br>
+            Daftar Ulang: 11–18 Juli 2026
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERI -->
+<section id="galeri">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">GALERI</div>
+      <h2 class="section-title">Momen Bersama Kami</h2>
+      <p class="section-desc">Dokumentasi berbagai kegiatan dan kenangan indah di SMPN 2 Teminabuan.</p>
+      <div class="divider-line"></div>
+    </div>
+    <div class="galeri-grid">
+      <div class="galeri-item">
+        <div class="galeri-img g1">🏆</div>
+        <div class="galeri-overlay"><div class="galeri-caption">Upacara Bendera HUT RI ke-80</div></div>
+      </div>
+      <div class="galeri-item">
+        <div class="galeri-img g2">🎭</div>
+        <div class="galeri-overlay"><div class="galeri-caption">Pentas Seni Tari Papua</div></div>
+      </div>
+      <div class="galeri-item">
+        <div class="galeri-img g3">🔬</div>
+        <div class="galeri-overlay"><div class="galeri-caption">Praktikum IPA</div></div>
+      </div>
+      <div class="galeri-item">
+        <div class="galeri-img g4">⚽</div>
+        <div class="galeri-overlay"><div class="galeri-caption">Turnamen Olahraga</div></div>
+      </div>
+      <div class="galeri-item">
+        <div class="galeri-img g5">🎓</div>
+        <div class="galeri-overlay"><div class="galeri-caption">Wisuda Kelas IX 2024</div></div>
+      </div>
+    </div>
+    <div class="news-more"><a class="btn-outline" href="#"><i class="ti ti-photo"></i> Lihat Semua Foto</a></div>
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section id="kontak" style="background:var(--gray-50)">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">KONTAK</div>
+      <h2 class="section-title">Hubungi Kami</h2>
+      <p class="section-desc">Ada pertanyaan? Tim kami siap membantu Anda.</p>
+      <div class="divider-line"></div>
+    </div>
+    <div class="kontak-grid">
+      <div class="kontak-info">
+        <div class="kontak-item">
+          <div class="kontak-icon"><i class="ti ti-map-pin"></i></div>
+          <div>
+            <div class="kontak-label">Alamat</div>
+            <div class="kontak-val">Jl. Pendidikan No. 1, Teminabuan,<br>Kabupaten Sorong Selatan,<br>Papua Barat Daya 98453</div>
+          </div>
+        </div>
+        <div class="kontak-item">
+          <div class="kontak-icon"><i class="ti ti-phone"></i></div>
+          <div>
+            <div class="kontak-label">Telepon</div>
+            <div class="kontak-val">(0956) 123-456<br>+62 812-3456-7890 (WhatsApp)</div>
+          </div>
+        </div>
+        <div class="kontak-item">
+          <div class="kontak-icon"><i class="ti ti-mail"></i></div>
+          <div>
+            <div class="kontak-label">Email</div>
+            <div class="kontak-val">info@smpn2teminabuan.sch.id<br>ppdb@smpn2teminabuan.sch.id</div>
+          </div>
+        </div>
+        <div class="kontak-item">
+          <div class="kontak-icon"><i class="ti ti-clock"></i></div>
+          <div>
+            <div class="kontak-label">Jam Kantor</div>
+            <div class="kontak-val">Senin–Kamis: 07:00–15:00<br>Jumat: 07:00–12:00</div>
+          </div>
+        </div>
+      </div>
+      <div class="kontak-form">
+        <h3>Kirim Pesan kepada Kami</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nama Lengkap</label>
+            <input class="form-input" type="text" placeholder="Nama Anda">
+          </div>
+          <div class="form-group">
+            <label class="form-label">No. Telepon</label>
+            <input class="form-input" type="text" placeholder="+62...">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" placeholder="email@contoh.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Keperluan</label>
+          <select class="form-input">
+            <option>Informasi PPDB</option>
+            <option>Informasi Akademik</option>
+            <option>Kerjasama & Kemitraan</option>
+            <option>Lainnya</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Pesan</label>
+          <textarea class="form-input form-textarea" placeholder="Tuliskan pesan Anda di sini..."></textarea>
+        </div>
+        <button class="btn-send" onclick="alert('Terima kasih! Pesan Anda telah terkirim. Kami akan segera menghubungi Anda.')"><i class="ti ti-send"></i> Kirim Pesan</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand-logo" style="width:56px;height:56px;font-size:18px">S2T</div>
+        <p>SMPN 2 Teminabuan adalah sekolah menengah pertama negeri unggulan di Kabupaten Sorong Selatan, Papua Barat Daya, yang berkomitmen pada mutu pendidikan dan pengembangan karakter siswa.</p>
+        <div class="social-links" style="margin-top:16px">
+          <a class="social-link" href="#"><i class="ti ti-brand-facebook"></i></a>
+          <a class="social-link" href="#"><i class="ti ti-brand-instagram"></i></a>
+          <a class="social-link" href="#"><i class="ti ti-brand-youtube"></i></a>
+          <a class="social-link" href="#"><i class="ti ti-brand-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Tentang Sekolah</h4>
+        <ul>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Profil Sekolah</a></li>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Visi & Misi</a></li>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Sejarah Sekolah</a></li>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Struktur Organisasi</a></li>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Data Guru & Staff</a></li>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Akreditasi Sekolah</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Akademik</h4>
+        <ul>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Kurikulum Merdeka</a></li>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Kalender Akademik</a></li>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Jadwal Pelajaran</a></li>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>E-Raport Siswa</a></li>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Ekstrakurikuler</a></li>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>PPDB Online</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Informasi</h4>
+        <ul>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Berita Sekolah</a></li>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Pengumuman</a></li>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Galeri Foto</a></li>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Galeri Video</a></li>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Unduh Dokumen</a></li>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Kontak & Peta</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 <span>SMPN 2 Teminabuan</span> — Kabupaten Sorong Selatan, Papua Barat Daya. Dibuat dengan ❤️ untuk kemajuan pendidikan Papua.
+    </div>
+  </div>
+</footer>
+</body>
+</html>

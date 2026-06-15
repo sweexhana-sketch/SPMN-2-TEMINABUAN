@@ -1,0 +1,294 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+    /* School Identity Colors - Green & Gold */
+    --green: #1a6b3a;
+    --green-light: #2d9e58;
+    --green-dark: #0f4525;
+    --gold: #c8902b;
+    --gold-light: #e8b04a;
+    --gold-pale: #fdf4e3;
+
+    /* Base Theme */
+    --background: hsl(0 0% 100%);
+    --foreground: hsl(220 15% 12%);
+    --card: hsl(0 0% 100%);
+    --card-foreground: hsl(220 15% 12%);
+    --popover: hsl(0 0% 100%);
+    --popover-foreground: hsl(220 15% 12%);
+    --primary: hsl(147 60% 26%);
+    --primary-foreground: hsl(0 0% 100%);
+    --secondary: hsl(40 65% 47%);
+    --secondary-foreground: hsl(0 0% 100%);
+    --muted: hsl(210 20% 96%);
+    --muted-foreground: hsl(215 8% 56%);
+    --accent: hsl(40 90% 94%);
+    --accent-foreground: hsl(40 65% 35%);
+    --destructive: hsl(0 84.2% 60.2%);
+    --destructive-foreground: hsl(0 0% 98%);
+    --border: hsl(214 15% 91%);
+    --input: hsl(214 15% 91%);
+    --ring: hsl(147 60% 26%);
+    --radius: 0.625rem;
+
+    /* Chart Colors */
+    --chart-1: hsl(147 60% 26%);
+    --chart-2: hsl(40 65% 47%);
+    --chart-3: hsl(197 37% 24%);
+    --chart-4: hsl(43 74% 66%);
+    --chart-5: hsl(27 87% 67%);
+
+    /* Sidebar */
+    --sidebar: hsl(0 0% 98%);
+    --sidebar-foreground: hsl(240 5.3% 26.1%);
+    --sidebar-primary: hsl(147 60% 26%);
+    --sidebar-primary-foreground: hsl(0 0% 98%);
+    --sidebar-accent: hsl(147 20% 95%);
+    --sidebar-accent-foreground: hsl(147 60% 20%);
+    --sidebar-border: hsl(220 13% 91%);
+    --sidebar-ring: hsl(147 60% 40%);
+}
+
+.dark {
+    --background: hsl(220 15% 6%);
+    --foreground: hsl(0 0% 98%);
+    --card: hsl(220 15% 8%);
+    --card-foreground: hsl(0 0% 98%);
+    --popover: hsl(220 15% 8%);
+    --popover-foreground: hsl(0 0% 98%);
+    --primary: hsl(147 55% 45%);
+    --primary-foreground: hsl(0 0% 100%);
+    --secondary: hsl(40 60% 50%);
+    --secondary-foreground: hsl(0 0% 100%);
+    --muted: hsl(220 10% 15%);
+    --muted-foreground: hsl(215 8% 60%);
+    --accent: hsl(40 40% 15%);
+    --accent-foreground: hsl(40 60% 70%);
+    --destructive: hsl(0 62.8% 30.6%);
+    --destructive-foreground: hsl(0 0% 98%);
+    --border: hsl(220 10% 18%);
+    --input: hsl(220 10% 18%);
+    --ring: hsl(147 55% 45%);
+    --chart-1: hsl(147 50% 45%);
+    --chart-2: hsl(40 60% 50%);
+    --chart-3: hsl(30 80% 55%);
+    --chart-4: hsl(280 65% 60%);
+    --chart-5: hsl(340 75% 55%);
+    --sidebar: hsl(220 15% 8%);
+    --sidebar-foreground: hsl(0 0% 90%);
+    --sidebar-primary: hsl(147 55% 45%);
+    --sidebar-primary-foreground: hsl(0 0% 100%);
+    --sidebar-accent: hsl(220 10% 15%);
+    --sidebar-accent-foreground: hsl(0 0% 90%);
+    --sidebar-border: hsl(220 10% 18%);
+    --sidebar-ring: hsl(147 55% 45%);
+}
+
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+
+    /* School brand colors */
+    --color-school-green: #1a6b3a;
+    --color-school-green-light: #2d9e58;
+    --color-school-green-dark: #0f4525;
+    --color-school-gold: #c8902b;
+    --color-school-gold-light: #e8b04a;
+    --color-school-gold-pale: #fdf4e3;
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+        font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    }
+}
+
+/* ============================
+   TICKER ANIMATION
+   ============================ */
+@keyframes ticker-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+.ticker-animate {
+    animation: ticker-scroll 25s linear infinite;
+}
+.ticker-animate:hover {
+    animation-play-state: paused;
+}
+
+/* ============================
+   HERO PATTERN OVERLAY
+   ============================ */
+.hero-pattern::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+/* ============================
+   GALLERY OVERLAY
+   ============================ */
+.galeri-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.galeri-item:hover {
+    transform: scale(1.03);
+}
+.galeri-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0);
+    display: flex;
+    align-items: flex-end;
+    transition: background 0.3s ease;
+}
+.galeri-item:hover .galeri-overlay {
+    background: rgba(15, 69, 37, 0.6);
+}
+.galeri-caption {
+    padding: 16px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.3s ease;
+}
+.galeri-item:hover .galeri-caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================
+   SCROLL FADE-IN ANIMATION
+   ============================ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out both;
+}
+
+/* ============================
+   FLOATING ANIMATION
+   ============================ */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* ============================
+   PULSE GLOW
+   ============================ */
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(26, 107, 58, 0.4); }
+    50% { box-shadow: 0 0 0 12px rgba(26, 107, 58, 0); }
+}
+.animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* ============================
+   RESPONSIVE NAV MOBILE
+   ============================ */
+@media (max-width: 1024px) {
+    .nav-desktop {
+        display: none;
+    }
+}
+@media (min-width: 1025px) {
+    .nav-mobile-btn {
+        display: none;
+    }
+}
+
+/* ============================
+   SMOOTH SCROLL
+   ============================ */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ============================
+   CARD HOVER LIFT
+   ============================ */
+.card-hover {
+    transition: all 0.25s ease;
+}
+.card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(26, 107, 58, 0.12);
+}
+
+/* ============================
+   MEDAL STYLES
+   ============================ */
+.medal-gold {
+    background: #fff7e0;
+    border: 3px solid #c8902b;
+}
+.medal-silver {
+    background: #f4f4f4;
+    border: 3px solid #a0a0a0;
+}
+.medal-bronze {
+    background: #fff1e8;
+    border: 3px solid #b5651d;
+}
